@@ -69,5 +69,3 @@ export async function setupServer() {
     console.error(error);
   }
 }
-
-setupServer();
