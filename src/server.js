@@ -1,20 +1,19 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
-import dotenv from 'dotenv';
 import { initMongoConnection } from './db/initMongoConnection.js';
 import { getAllContacts, getContactById } from './services/contacts.js';
+import { getEnvVar } from './utils/getEnvVar.js';
 
-dotenv.config();
-
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(getEnvVar('PORT', '3000')) || 3000;
 
 export async function setupServer() {
   try {
     await initMongoConnection();
 
     const app = express();
-
+    app.use(express.json());
     app.use(cors());
 
     app.use(
@@ -58,8 +57,9 @@ export async function setupServer() {
     });
 
     app.use((err, req, res, next) => {
-      console.error(err.stack);
-      res.status(500).send('Something broke!');
+      res.status(500).json({
+        message: 'Something went wrong',
+      });
     });
 
     app.listen(PORT, () => {
