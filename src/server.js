@@ -7,7 +7,7 @@ import { getAllContacts, getContactById } from './services/contacts.js';
 
 dotenv.config();
 
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 8080;
 
 export async function setupServer() {
   try {
@@ -57,10 +57,10 @@ export async function setupServer() {
       });
     });
 
-    // app.use((err, req, res, next) => {
-    //   console.error(err.stack);
-    //   res.status(500).send('Something broke!');
-    // });
+    app.use((err, req, res, next) => {
+      console.error(err.stack);
+      res.status(500).send('Something broke!');
+    });
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
