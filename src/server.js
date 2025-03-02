@@ -1,20 +1,15 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
-import dotenv from 'dotenv';
-import { initMongoConnection } from './db/initMongoConnection.js';
 import { getAllContacts, getContactById } from './services/contacts.js';
-
-dotenv.config();
 
 const PORT = Number(process.env.PORT) || 3000;
 
 export async function setupServer() {
   try {
-    await initMongoConnection();
-
     const app = express();
-
+    app.use(express.json());
     app.use(cors());
 
     app.use(
@@ -29,6 +24,7 @@ export async function setupServer() {
       const contacts = await getAllContacts();
 
       res.status(200).json({
+        status: 200,
         message: 'Successfully found contacts!',
         data: contacts,
       });
@@ -40,12 +36,14 @@ export async function setupServer() {
 
       if (!contact) {
         res.status(404).json({
+          status: 404,
           message: 'Contact not found',
         });
         return;
       }
 
       res.status(200).json({
+        status: 200,
         message: 'Successfully found contact with id {contactId}!',
         data: contact,
       });
@@ -53,13 +51,16 @@ export async function setupServer() {
 
     app.use('*', (req, res, next) => {
       res.status(404).json({
+        status: 404,
         message: 'Not found',
       });
     });
 
     app.use((err, req, res, next) => {
-      console.error(err.stack);
-      res.status(500).send('Something broke!');
+      res.status(500).json({
+        status: 500,
+        message: 'Something went wrong',
+      });
     });
 
     app.listen(PORT, () => {
@@ -69,5 +70,3 @@ export async function setupServer() {
     console.error(error);
   }
 }
-
-setupServer();
