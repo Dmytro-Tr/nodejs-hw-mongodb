@@ -1,4 +1,3 @@
-//Не працює contactType
 const parseContactType = (contactType) => {
   const isString = typeof contactType === 'string';
   if (!isString) return;
@@ -7,13 +6,15 @@ const parseContactType = (contactType) => {
     ['work', 'home', 'personal'].includes(contactType);
 
   if (isValidType(contactType)) return contactType;
+
+  return undefined;
 };
 
 const parseFavourite = (isFavourite) => {
   if (isFavourite === 'true') return true;
   if (isFavourite === 'false') return false;
 
-  return;
+  return undefined;
 };
 
 export const parseFilterParams = (query) => {
