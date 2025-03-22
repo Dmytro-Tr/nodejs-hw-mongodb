@@ -9,6 +9,14 @@ import { errorHandler } from './middlewares/errorHandler.js';
 
 const PORT = Number(process.env.PORT) || 3000;
 
+export const startServer = () => {
+  const app = express();
+
+  app.use(cookieParser());
+  app.use(express.json());
+  app.use(cors());
+};
+
 export async function setupServer() {
   try {
     const app = express();
@@ -36,11 +44,3 @@ export async function setupServer() {
     console.error(error);
   }
 }
-
-export const startServer = () => {
-  const app = express();
-
-  app.use(express.json());
-  app.use(cors());
-  app.use(cookieParser());
-};
