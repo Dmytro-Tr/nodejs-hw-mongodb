@@ -14,7 +14,6 @@ import {
   createContactsSchema,
   updateContactsSchema,
 } from '../validation/contacts.js';
-import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
 
@@ -46,9 +45,5 @@ router.patch(
   validateBody(updateContactsSchema),
   ctrlWrapper(patchContactController),
 );
-
-router.use(authenticate);
-
-router.get('/', ctrlWrapper(getContactsController));
 
 export default router;
