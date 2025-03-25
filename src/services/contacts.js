@@ -5,7 +5,7 @@ export const getAllContacts = async ({
   page,
   perPage,
   sortBy,
-  sortOrder,
+  sortOrder = 'asc',
   filter = {},
   userId,
 }) => {
@@ -20,26 +20,34 @@ export const getAllContacts = async ({
   if (filter.isFavourite) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
-  const [contactsCount, contacts] = await Promise.all([
-    ContactsCollection.find(contactsQuery)
-      .merge(contactsQuery)
-      .countDocuments(),
-    contactsQuery
-      .skip(skip)
-      .limit(limit)
-      .sort({ [sortBy]: sortOrder })
-      .exec(),
-  ]);
+  // const [contactsCount, contacts] = await Promise.all([
+  //   ContactsCollection.find(contactsQuery)
+  //     .merge(contactsQuery)
+  //     .countDocuments(),
+  //   contactsQuery
+  //     .skip(skip)
+  //     .limit(limit)
+  //     .sort({ [sortBy]: sortOrder })
+  //     .exec(),
+  // ]);
+  const contactsCount = await ContactsCollection.find()
+    .merge(contactsQuery)
+    .countDocuments();
+
+  const data = await contactsQuery
+    .skip(skip)
+    .limit(limit)
+    .sort({ [sortBy]: sortOrder })
+    .exec();
 
   const pagimationData = calculatePaginationData(contactsCount, page, perPage);
   return {
-    data: contacts,
+    data,
     ...pagimationData,
   };
 };
 
 export const getContactById = async (contactId, userId) => {
-  // const contact = await ContactsCollection.findById(contactId);
   const contact = await ContactsCollection.findOne({
     _id: contactId,
     userId: userId,
@@ -52,27 +60,28 @@ export const createContact = async (contact) => {
   return contactPost;
 };
 
-export const deleteContact = async (contactId, userId) => {
+export const deleteContact = async (contactId) => {
   const contact = await ContactsCollection.findOneAndDelete({
-    _id: contactId,
-    userId,
+    _id: contactId.id,
+    userId: contactId.userId,
   });
   return contact;
 };
 
-export const updateContact = async (contactId, contact, options, userId) => {
+export const updateContact = async (contactId, contact, options) => {
   const rawResult = await ContactsCollection.findOneAndUpdate(
     {
-      _id: contactId,
-      userId,
+      _id: contactId.id,
+      userId: contactId.userId,
     },
     contact,
     {
       new: true,
       includeResultMetadata: true,
-      ...contact,
+      ...options,
     },
   );
+
   if (!rawResult || !rawResult.value) return null;
 
   return {
