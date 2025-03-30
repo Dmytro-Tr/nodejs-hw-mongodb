@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import { UPLOAD_DIR } from './constants/index.js';
 
 const PORT = Number(process.env.PORT) || 3000;
 
@@ -27,6 +28,8 @@ export async function setupServer() {
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
+
+    app.use('/uploads', express.static(UPLOAD_DIR));
   } catch (error) {
     console.error(error);
   }
