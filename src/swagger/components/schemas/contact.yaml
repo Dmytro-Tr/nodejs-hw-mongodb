@@ -1,0 +1,42 @@
+type: object
+required:
+  - _id
+  - name
+  - phoneNumber
+  - contactType
+  - userId
+  - createdAt
+  - updatedAt
+properties:
+  _id:
+    description: 'Genereted id'
+    type: string
+    format: objectId
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: "Contact's name"
+    type: string
+    example: 'Anna Kvitka'
+  phoneNumber:
+    description: "Contact's phone number"
+    type: string
+    example: '+380891234567'
+  contactType:
+    description: "Contact's type"
+    type: string
+    enum: ['work', 'home', 'personal']
+    example: 'home'
+  userId:
+    description: "Contact's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  createdAt:
+    type: string
+    format: date-time
+    description: Contact created date
+    example: 2011-10-10T14:48:00.000+09:00
+  updatedAt:
+    type: string
+    format: date-time
+    description: Contact created date
+    example: 2011-10-10T14:48:00.000+09:00

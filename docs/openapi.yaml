@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Contacts app #<назва вашого додатку>
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  #<опис вашого додатку>
+  description: This is a documentation of contacts app
+tags: # теги, що ви будете використовувати
+  - name: Contacts
+    description: Operations with contacts.
+  - name: Auth
+    description: Auth operations.
+servers:
+  - url: http://127.0.0.1:8080
+  - url: https://nodejs-hw-mongodb-9cc6.onrender.com #посилання на задеплоєний сайт
+paths:
+  # тут будуть посилання на ендпоінти
+  /contacts:
+    get:
+      $ref: ../src/swagger/paths/contacts/get.yaml
+    post:
+      $ref: ../src/swagger/paths/contacts/post.yaml
+  /contatcs/{id}:
+    get:
+      $ref: ../src/swagger/paths/contacts/{id}/get.yaml
+    delete:
+      $ref: ../src/swagger/paths/contacts/{id}/delete.yaml
+    patch:
+      $ref: ../src/swagger/paths/contacts/{id}/patch.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
