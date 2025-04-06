@@ -13,7 +13,7 @@ tags: # теги, що ви будете використовувати
   - name: Auth
     description: Auth operations.
 servers:
-  - url: http://127.0.0.1:8080
+  - url: 'http://127.0.0.1:8080'
   - url: https://nodejs-hw-mongodb-9cc6.onrender.com #посилання на задеплоєний сайт
 paths:
   # тут будуть посилання на ендпоінти
@@ -29,6 +29,26 @@ paths:
       $ref: ../src/swagger/paths/contacts/{id}/delete.yaml
     patch:
       $ref: ../src/swagger/paths/contacts/{id}/patch.yaml
+
+  /auth/register:
+    post:
+      $ref: ../src/swagger/paths/auth/register.yaml
+  /auth/login:
+    post:
+      $ref: ../src/swagger/paths/auth/login.yaml
+  /auth/logout:
+    post:
+      $ref: ../src/swagger/paths/auth/logout.yaml
+  /auth/refresh:
+    post:
+      $ref: ../src/swagger/paths/auth/refresh.yaml
+  /auth/sendresetemail:
+    post:
+      $ref: ../src/swagger/paths/auth/sendresetemail.yaml
+  /auth/resetpassword:
+    post:
+      $ref: ../src/swagger/paths/auth/resetpassword.yaml
+
 components:
   securitySchemes:
     bearerAuth:
