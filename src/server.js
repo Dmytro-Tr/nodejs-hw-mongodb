@@ -9,6 +9,14 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { UPLOAD_DIR } from './constants/index.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
+// import swaggerUIExpress from 'swagger-ui-express';
+// import * as fs from 'node:fs';
+// import path from 'node:path';
+
+// const swaggerDocument = JSON.parse(
+//   fs.readFileSync(path.resolve('docs', 'swagger.json'), 'utf-8'),
+// );
+
 const PORT = Number(process.env.PORT) || 3000;
 
 export async function setupServer() {
@@ -33,6 +41,11 @@ export async function setupServer() {
     app.use('/uploads', express.static(UPLOAD_DIR));
 
     app.use('/api-docs', swaggerDocs());
+    // app.use(
+    //   '/api-docs',
+    //   swaggerUIExpress.serve,
+    //   swaggerUIExpress.setup(swaggerDocument),
+    // );
   } catch (error) {
     console.error(error);
   }
