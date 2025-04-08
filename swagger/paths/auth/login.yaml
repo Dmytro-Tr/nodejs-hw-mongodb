@@ -45,6 +45,8 @@ responses:
               description: 'JWT token for authentication'
               type: string
               example: 'fXZcvmFqfm8s2hLOs1iVmFy/8V/lIxAwdP8GrcuK'
+  '400':
+    $ref: '../../components/responses/400.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
   '404':

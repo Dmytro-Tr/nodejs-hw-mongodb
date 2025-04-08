@@ -35,6 +35,11 @@ requestBody:
             description: "Contact's type"
             type: string
             enum: ['work', 'home', 'personal']
+          photo:
+            description: 'Update contatc photo'
+            type: string
+            format: binary
+
 responses:
   '201':
     description: Successfully created a contact!
@@ -56,6 +61,8 @@ responses:
             data:
               type: object
               $ref: '../../components/schemas/contact.yaml'
+  '400':
+    $ref: ../../components/responses/400.yaml
   '401':
     $ref: ../../components/responses/401.yaml
   '500':
