@@ -38,6 +38,14 @@ parameters:
       enum: [true, false]
       example: true
     description: 'This field allows to select favourite contacts'
+  - in: query
+    name: contactType
+    schema:
+      type: string
+      enum: ['work', 'home', 'personal']
+      example: 'home'
+      description: 'This field allows you to select the type of contact'
+
 responses:
   '200':
     description: Successfully found contacts!
