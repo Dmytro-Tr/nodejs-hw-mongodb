@@ -1,0 +1,26 @@
+type: object
+required:
+  - name
+  - email
+  - password
+properties:
+  _id:
+    type: string
+    example: '65e4decdd286b30065d54af9'
+  name:
+    type: string
+    example: 'Anna Kvitka'
+  email:
+    type: string
+    example: 'kvatkAnna@gmail.com'
+  password:
+    type: string
+    example: 'password12345'
+  createdAt:
+    type: string
+    format: date-time
+    example: '2011-10-10T14:48:00.000+09:00'
+  updatedAt:
+    type: string
+    format: date-time
+    example: '2011-10-10T14:48:00.000+09:00'

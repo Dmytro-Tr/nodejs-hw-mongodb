@@ -94,6 +94,20 @@
               "example": true
             },
             "description": "This field allows to select favourite contacts"
+          },
+          {
+            "in": "query",
+            "name": "contactType",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "work",
+                "home",
+                "personal"
+              ],
+              "example": "home",
+              "description": "This field allows you to select the type of contact"
+            }
           }
         ],
         "responses": {
@@ -569,21 +583,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "properties": {
-                        "_id": {
-                          "type": "string",
-                          "format": "objectId",
-                          "example": "66d8a90efca05bf0ee47593a"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Anna Kvitka"
-                        },
-                        "email": {
-                          "type": "string",
-                          "example": "kvatkAnna@gmail.com"
-                        }
-                      }
+                      "$ref": "#/components/schemas/user"
                     }
                   }
                 }
@@ -1089,13 +1089,10 @@
       "contact": {
         "type": "object",
         "required": [
-          "_id",
           "name",
           "phoneNumber",
           "contactType",
-          "userId",
-          "createdAt",
-          "updatedAt"
+          "userId"
         ],
         "properties": {
           "_id": {
@@ -1114,6 +1111,16 @@
             "type": "string",
             "example": "+380891234567"
           },
+          "email": {
+            "description": "Contact's email",
+            "type": "string",
+            "example": "kvatkAnna@gmail.com"
+          },
+          "isFavourite": {
+            "description": "What contact is favorite",
+            "type": "boolean",
+            "example": false
+          },
           "contactType": {
             "description": "Contact's type",
             "type": "string",
@@ -1123,6 +1130,12 @@
               "personal"
             ],
             "example": "home"
+          },
+          "photo": {
+            "description": "Update contatc photo",
+            "type": "string",
+            "format": "binary",
+            "example": "https://res.cloudinary.com/dkktk5mwk/image/upload/v1743433106/tgqlgriyh5yibvb7kkma.jpg"
           },
           "userId": {
             "description": "Contact's id",
@@ -1139,6 +1152,42 @@
             "type": "string",
             "format": "date-time",
             "description": "Contact created date",
+            "example": "2011-10-10T14:48:00.000+09:00"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "name": {
+            "type": "string",
+            "example": "Anna Kvitka"
+          },
+          "email": {
+            "type": "string",
+            "example": "kvatkAnna@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password12345"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2011-10-10T14:48:00.000+09:00"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "example": "2011-10-10T14:48:00.000+09:00"
           }
         }

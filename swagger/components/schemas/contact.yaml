@@ -1,12 +1,9 @@
 type: object
 required:
-  - _id
   - name
   - phoneNumber
   - contactType
   - userId
-  - createdAt
-  - updatedAt
 properties:
   _id:
     description: 'Genereted id'
@@ -21,11 +18,24 @@ properties:
     description: "Contact's phone number"
     type: string
     example: '+380891234567'
+  email:
+    description: "Contact's email"
+    type: string
+    example: 'kvatkAnna@gmail.com'
+  isFavourite:
+    description: 'What contact is favorite'
+    type: boolean
+    example: false
   contactType:
     description: "Contact's type"
     type: string
     enum: ['work', 'home', 'personal']
     example: 'home'
+  photo:
+    description: 'Update contatc photo'
+    type: string
+    format: binary
+    example: https://res.cloudinary.com/dkktk5mwk/image/upload/v1743433106/tgqlgriyh5yibvb7kkma.jpg
   userId:
     description: "Contact's id"
     type: string
