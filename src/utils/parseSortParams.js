@@ -1,5 +1,3 @@
-// import { SORT_ORDER } from '../constants/index.js';
-
 const parseSortOrder = (sortOrder) => {
   if (typeof sortOrder === 'undefined') {
     return 'asc';

@@ -14,7 +14,6 @@ import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 
 export const getContactsController = async (req, res) => {
-  // console.log(req.query);
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
@@ -38,7 +37,6 @@ export const getContactsController = async (req, res) => {
 export const getContactsByIdController = async (req, res, next) => {
   const { contactId } = req.params;
   const contact = await getContactById(contactId, req.user.id);
-  // console.log(req.user);
 
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
@@ -88,7 +86,6 @@ export const deleteContactController = async (req, res, next) => {
     throw next(createHttpError(404, 'Contact not found'));
   }
   res.status(204).send();
-  // console.log(contact);
 };
 
 export const upsertContactController = async (req, res, next) => {
