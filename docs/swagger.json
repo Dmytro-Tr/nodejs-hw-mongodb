@@ -292,7 +292,7 @@
         }
       }
     },
-    "/contatcs/{id}": {
+    "/contacts/{id}": {
       "get": {
         "tags": [
           "Contacts"
