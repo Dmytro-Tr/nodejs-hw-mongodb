@@ -19,8 +19,8 @@ const contactsSchema = new Schema(
     },
     contactType: {
       type: String,
-      emun: ['work', 'home', 'personal'],
       required: true,
+      enum: ['work', 'home', 'personal'],
       default: 'personal',
     },
     userId: {

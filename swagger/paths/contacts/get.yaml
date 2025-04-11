@@ -42,8 +42,8 @@ parameters:
     name: contactType
     schema:
       type: string
-      enum: [work, home, personal]
-      example: home
+      enum: ['work', 'home', 'personal']
+      example: 'home'
       description: 'This field allows you to select the type of contact'
 
 responses:

@@ -15,8 +15,12 @@ import {
   updateContactsSchema,
 } from '../validation/contacts.js';
 import { upload } from '../middlewares/multer.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
+
+router.use(authenticate);
+router.use('/:contactId', isValidId);
 
 router.get('/', ctrlWrapper(getContactsController));
 

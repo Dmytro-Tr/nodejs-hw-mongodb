@@ -4,7 +4,7 @@ import { UsersCollection } from '../models/user.js';
 
 export const authenticate = async (req, res, next) => {
   const { authorization } = req.headers;
-  console.log(authorization);
+  // console.log(authorization);
 
   if (!authorization) {
     next(createHttpError(401, 'Please provide Authorization header'));

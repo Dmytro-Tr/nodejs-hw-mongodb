@@ -1098,7 +1098,6 @@
           "_id": {
             "description": "Genereted id",
             "type": "string",
-            "format": "objectId",
             "example": "65e4decdd286b30065d54af9"
           },
           "name": {
@@ -1129,7 +1128,8 @@
               "home",
               "personal"
             ],
-            "example": "home"
+            "example": "personal",
+            "default": "personal"
           },
           "photo": {
             "description": "Update contatc photo",

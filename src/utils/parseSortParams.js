@@ -1,3 +1,5 @@
+// import { SORT_ORDER } from '../constants/index.js';
+
 const parseSortOrder = (sortOrder) => {
   if (typeof sortOrder === 'undefined') {
     return 'asc';
@@ -11,9 +13,19 @@ const parseSortOrder = (sortOrder) => {
 };
 
 const parseSortBy = (sortBy) => {
-  const keysOfStudent = ['_id', 'name', 'isFavourite'];
+  const keysOfContact = [
+    '_id',
+    'name',
+    'phoneNumber',
+    'email',
+    'isFavourite',
+    'contactType',
+    'createdAt',
+    'updatedAt',
+    'photo',
+  ];
 
-  if (keysOfStudent.includes(sortBy)) {
+  if (keysOfContact.includes(sortBy)) {
     return sortBy;
   }
   return '_id';
