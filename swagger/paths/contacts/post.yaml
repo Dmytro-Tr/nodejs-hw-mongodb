@@ -36,7 +36,7 @@ requestBody:
             type: string
             enum: ['work', 'home', 'personal']
           photo:
-            description: 'Update contatc photo'
+            description: 'Update contact photo'
             type: string
             format: binary
 
